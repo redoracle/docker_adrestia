@@ -35,7 +35,8 @@ RUN set -x \
     && cd \
     && wget https://github.com/gohugoio/hugo/releases/download/v0.68.0/hugo_extended_0.68.0_Linux-64bit.deb \
     && dpkg -i hugo_extended_0.68.0_Linux-64bit.deb \
-    && echo -e "#!/bin/bash \n\n cd ~/adrestia/user-guide \n hugo server -t book --bind 0.0.0.0 \n" > /entrypoint.sh \
+    && echo -e '#!/bin/bash' > /entrypoint.sh \
+    && echo -e "\nIPH=$(ifconfig eth0 | grep inet | awk '{ print $2 }') \ncd ~/adrestia/user-guide \n hugo server -t book --minify --baseURL=http://$IPH:1313/ --bind $IPH \n" >> /entrypoint.sh \
     && chmod +x /entrypoint.sh \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
     
