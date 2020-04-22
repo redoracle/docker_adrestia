@@ -37,6 +37,7 @@ RUN set -x \
     && cd \
     && wget https://github.com/gohugoio/hugo/releases/download/v0.68.0/hugo_extended_0.68.0_Linux-64bit.deb \
     && dpkg -i hugo_extended_0.68.0_Linux-64bit.deb \
+    && git clone https://github.com/input-output-hk/adrestia.git \
     && chmod +x /entrypoint.sh \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
     
